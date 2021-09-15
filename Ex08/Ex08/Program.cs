@@ -10,22 +10,56 @@ namespace Ex08
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Mata in ditt namn, gatuadress, postnummer, postort: ");
-            //string personInfo = Console.ReadLine();
-            string[,] personInfo = { 
-                { "Jing" , "apelgatan", "802 56", "gävle"}, 
-                {"felix" , "solvägen", "801 45", "valbo" }, 
-                {"malin" , "skogstigen", "814 23", "falun" }, 
-                { "emil" , "furumovägen", "802 69", "gävle"}, 
-                { "anna" , "moravägen", "801 59", "stockholm" }, 
-            };
+            string[,] personInfo = new string[5, 4];
+            int personCount = 0;
+            bool running = true;
 
-            for(int i = 0; i < 5; i++)
+            while (personCount < 5 && running)
             {
-                for(int j = 0; j < 4; j++)
+                for (int i = personCount; i < 5; i++)
                 {
-                    Console.WriteLine(personInfo[i, j]);
+                    for (int j = 0; j < 4; j++)
+                    {
+                        switch (j)
+                        {
+                            case 0:
+                                Console.Write("Mata in ditt namn: ");
+                                personInfo[i, j] = Console.ReadLine();
+                                break;
+                            case 1:
+                                Console.Write("Mata in din gatuadress: ");
+                                personInfo[i, j] = Console.ReadLine();
+                                break;
+                            case 2:
+                                Console.Write("Mata in ditt postnummer: ");
+                                personInfo[i, j] = Console.ReadLine();
+                                break;
+                            case 3:
+                                Console.Write("Mata in ditt postort: ");
+                                personInfo[i, j] = Console.ReadLine();
+                                break;
+                        }
+                    }
+
+                    Console.Write("Vill mata in en ny person(J/N): ");
+                    string answer = Console.ReadLine().ToLower();
+                    if (answer == "j")
+                    {
+                        personCount++;
+                        continue;
+                    }
+                    else if(answer == "n")
+                    {
+                        running = false;
+                        break;
+                    }
                 }
+            }
+
+            foreach(string item in personInfo)
+            {
+                if (!String.IsNullOrEmpty(item))
+                    Console.WriteLine(item);
             }
 
         }
